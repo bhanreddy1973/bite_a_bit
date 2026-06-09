@@ -1,0 +1,32 @@
+export interface MenuItem {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  image_url: string;
+  available: boolean;
+  cuisine: string;
+  dish_type: string;
+  meal_type: string[];
+  diet: 'Vegetarian' | 'Non-Vegetarian' | 'Vegan';
+  allergens: string[];
+  spice_level: 'None' | 'Mild' | 'Medium' | 'Hot';
+  taste_profile: string[];
+  flavor_tags: string[];
+  ingredients: string[];
+  calories: number;
+  carbs: number;
+  protein: number;
+  fat: number;
+  is_best_seller: boolean;
+  rating: number;
+  review_count: number;
+  prep_time: string;
+  portion_size: string;
+  serves: string;
+  cooking_method: string;
+  available_time: string[];
+  occasion: string[];
+  pairs_well_with: string[];
+  combo_items: string[];
+}
