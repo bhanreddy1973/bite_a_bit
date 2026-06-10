@@ -6,14 +6,15 @@ import { useEffect, useState, useCallback } from 'react';
  * useMediaQuery hook — listens to a CSS media query and returns whether it matches.
  * Updates within one frame of the media query change event.
  *
+ * Always returns `false` on the server and during the first client render to avoid
+ * hydration mismatches. The actual value is resolved in a useEffect after mount.
+ *
  * @param query - A CSS media query string (e.g., '(min-width: 768px)')
  * @returns boolean indicating if the media query currently matches
  */
 export function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
-    return window.matchMedia(query).matches;
-  });
+  // Always start with false to match server-rendered HTML (avoids hydration mismatch)
+  const [matches, setMatches] = useState<boolean>(false);
 
   const handleChange = useCallback((event: MediaQueryListEvent) => {
     setMatches(event.matches);
@@ -22,7 +23,7 @@ export function useMediaQuery(query: string): boolean {
   useEffect(() => {
     const mediaQuery = window.matchMedia(query);
 
-    // Sync state on mount (handles SSR hydration mismatch)
+    // Set the real value after mount (client-only)
     setMatches(mediaQuery.matches);
 
     mediaQuery.addEventListener('change', handleChange);

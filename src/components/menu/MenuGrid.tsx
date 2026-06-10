@@ -1,12 +1,17 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useCallback } from 'react';
+import dynamic from 'next/dynamic';
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
 import { MenuItem } from '@/types/menu';
 import { MenuCard } from './MenuCard';
 import { useCartStore } from '@/stores/cartStore';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { Button } from '@/components/ui/Button';
+
+const MenuCardExpanded = dynamic(() => import('./MenuCardExpanded'), {
+  ssr: false,
+});
 
 export interface MenuGridProps {
   items: MenuItem[];
@@ -23,6 +28,8 @@ function MenuGridComponent({ items, isLoading, error, onRetry }: MenuGridProps) 
   const increaseQuantity = useCartStore((state) => state.increaseQuantity);
   const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
 
+  const [expandedItem, setExpandedItem] = useState<MenuItem | null>(null);
+
   const getCartQuantity = (itemId: string): number => {
     const cartItem = cartItems.find((ci) => ci.menuItem.id === itemId);
     return cartItem ? cartItem.quantity : 0;
@@ -32,10 +39,13 @@ function MenuGridComponent({ items, isLoading, error, onRetry }: MenuGridProps) 
     return cartItems.some((ci) => ci.menuItem.id === itemId);
   };
 
-  const handleExpand = (item: MenuItem) => {
-    // Future: expand card to show details via MenuCardExpanded
-    console.info('Expand item:', item.id);
-  };
+  const handleExpand = useCallback((item: MenuItem) => {
+    setExpandedItem(item);
+  }, []);
+
+  const handleCloseExpanded = useCallback(() => {
+    setExpandedItem(null);
+  }, []);
 
   // Loading state
   if (isLoading) {
@@ -116,6 +126,12 @@ function MenuGridComponent({ items, isLoading, error, onRetry }: MenuGridProps) 
           ))}
         </AnimatePresence>
       </motion.div>
+
+      <MenuCardExpanded
+        item={expandedItem}
+        isOpen={expandedItem !== null}
+        onClose={handleCloseExpanded}
+      />
     </LayoutGroup>
   );
 }

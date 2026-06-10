@@ -153,7 +153,7 @@ Complete modernization of the Bite a Bit food ordering app from prototype to pro
     - Verify for any (functionName, params) pair, at most one Firestore request is in-flight within a 5-second window
     - **Validates: Requirements 16.5**
 
-- [~] 5. Checkpoint - Ensure all tests pass
+- [ ] 5. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 - [x] 6. Layout shell and navigation
@@ -212,7 +212,7 @@ Complete modernization of the Bite a Bit food ordering app from prototype to pro
     - Read restaurant name from URL params
     - _Requirements: 4.1, 4.7_
 
-- [ ] 8. Menu browsing page
+- [x] 8. Menu browsing page
   - [x] 8.1 Create custom hooks for menu data
     - Create src/hooks/useDebounce.ts with configurable delay
     - Create src/hooks/useMenuData.ts implementing stale-while-revalidate logic: check menuCacheStore, fetch from firebaseService with 10s timeout, show skeleton during fetch, handle errors with retry
@@ -233,30 +233,30 @@ Complete modernization of the Bite a Bit food ordering app from prototype to pro
     - Create src/components/menu/SortDropdown.tsx: sort options (price low-high, price high-low, rating, prep time), layout animation on reorder (300ms)
     - _Requirements: 5.3, 5.4, 5.5, 5.6_
 
-  - [-] 8.4 Implement MenuGrid and FloatingCartBar
+  - [x] 8.4 Implement MenuGrid and FloatingCartBar
     - Create src/components/menu/MenuGrid.tsx: renders grid of MenuCards, skeleton loading (6 placeholders), error state with retry, empty state, staggered entry animation, layout animation on filter/sort
     - Create src/components/menu/FloatingCartBar.tsx: fixed bottom position (above bottom nav on mobile), shows total count + price, slide-up/down animations, navigates to /order-summary
     - _Requirements: 5.1, 5.5, 5.8, 6.6, 6.7, 10.4, 10.5_
 
-  - [-] 8.5 Implement Menu page
+  - [x] 8.5 Implement Menu page
     - Rewrite src/app/menu/page.tsx: compose useMenuData hook, CategoryFilter, SearchBar, SortDropdown, MenuGrid, FloatingCartBar
     - Add auth guard: redirect to / if not authenticated
     - Apply useMemo for filtered/sorted menu list
     - _Requirements: 5.1, 5.2, 11.1, 11.5_
 
-  - [~] 8.6 Write property test for authentication gate
+  - [x] 8.6 Write property test for authentication gate
     - **Property 2: Authentication Gate**
     - Verify pages /menu, /order-summary, /order-confirmation, /nutrition-info redirect to / when userStore.session.isAuthenticated is false
     - **Validates: Requirements 4.5, 7.8**
 
-- [ ] 9. Cart and order flow
-  - [~] 9.1 Implement cart components
+- [x] 9. Cart and order flow
+  - [x] 9.1 Implement cart components
     - Create src/components/cart/CartItemRow.tsx: item name, unit price, quantity stepper (+/-), line subtotal, apply React.memo
     - Create src/components/cart/CartSummary.tsx: items grouped by dish_type, category subtotals, grand total (1.5x font size)
     - Create src/components/cart/EmptyCart.tsx: illustration, browse menu prompt
     - _Requirements: 6.2, 6.3, 6.7, 7.1, 7.2_
 
-  - [~] 9.2 Implement Order Summary page
+  - [x] 9.2 Implement Order Summary page
     - Rewrite src/app/order-summary/page.tsx: display cart items grouped by category, Place Order button
     - On Place Order: validate userId + restaurantName exist, show loading/disable button, call firebaseService.placeOrder with 15s timeout
     - On success: clear cart, store orderId in localStorage, navigate to /order-confirmation
@@ -265,12 +265,12 @@ Complete modernization of the Bite a Bit food ordering app from prototype to pro
     - Auth guard: redirect to / if not authenticated
     - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8_
 
-  - [~] 9.3 Write property test for order idempotency
+  - [x] 9.3 Write property test for order idempotency
     - **Property 7: Order Idempotency**
     - Verify Place Order button is disabled after first click until the request resolves, preventing duplicate submissions
     - **Validates: Requirements 7.4**
 
-  - [~] 9.4 Implement Order Confirmation page
+  - [x] 9.4 Implement Order Confirmation page
     - Rewrite src/app/order-confirmation/page.tsx: display order status heading, estimated prep time, list of items with status (preparing/ready/served), addedBy, and prep time
     - "Check Nutrition Balance" button navigates to /nutrition-info
     - "Add More" button navigates to /menu while retaining order in localStorage
@@ -278,7 +278,7 @@ Complete modernization of the Bite a Bit food ordering app from prototype to pro
     - Auth guard
     - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5, 8.6_
 
-  - [~] 9.5 Implement Nutrition Info page
+  - [x] 9.5 Implement Nutrition Info page
     - Rewrite src/app/nutrition-info/page.tsx: calculate total calories, carbs, protein, fat from order items × quantity
     - Render DonutChart with macronutrient percentages, total calories in center
     - Display legend with color indicators and rounded percentage values
@@ -287,17 +287,17 @@ Complete modernization of the Bite a Bit food ordering app from prototype to pro
     - Auth guard
     - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5, 9.6_
 
-- [~] 10. Checkpoint - Ensure all tests pass
+- [ ] 10. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 11. Error handling, accessibility, and performance
-  - [~] 11.1 Implement ErrorBoundary and shared components
+  - [x] 11.1 Implement ErrorBoundary and shared components
     - Create src/components/shared/ErrorBoundary.tsx: React Error Boundary catching unhandled errors, fallback UI with error message and "Try Again" button that reloads page component
     - Create src/components/shared/EmptyState.tsx: reusable empty state with icon, message, action button
     - Create src/components/shared/LoadingScreen.tsx: full-page loading indicator
     - _Requirements: 12.1, 12.2, 12.4_
 
-  - [~] 11.2 Add accessibility enhancements across all components
+  - [ ] 11.2 Add accessibility enhancements across all components
     - Ensure heading hierarchy (one h1 per page, no skipped levels) across all pages
     - Add ARIA live regions for toast notifications and cart count updates
     - Verify all icon buttons have aria-label
@@ -305,45 +305,45 @@ Complete modernization of the Bite a Bit food ordering app from prototype to pro
     - Add keyboard navigation support for modal focus trapping
     - _Requirements: 13.1, 13.2, 13.3, 13.4, 13.5, 13.6_
 
-  - [~] 11.3 Apply performance optimizations
+  - [ ] 11.3 Apply performance optimizations
     - Add dynamic imports for DonutChart, MenuCardExpanded, Modal components
     - Ensure all food images use Next.js Image component with blur placeholder and responsive sizes
     - Verify React.memo applied to MenuCard, CartItemRow, OrderItemCard
     - Verify useMemo for cart totals, filtered menu list, nutrition calculations
     - _Requirements: 11.1, 11.2, 11.5_
 
-  - [~] 11.4 Write property test for cache freshness
+  - [ ] 11.4 Write property test for cache freshness
     - **Property 8: Cache Freshness**
     - Verify menu data served from cache always has a lastFetchedAt timestamp, and data older than 30 minutes is never served without a background refresh attempt
     - **Validates: Requirements 11.3**
 
 - [ ] 12. Integration testing and code quality
-  - [~] 12.1 Write integration tests for auth flow
+  - [ ] 12.1 Write integration tests for auth flow
     - Test successful login: form submit → session stored in userStore → redirect to /menu
     - Test validation rejection: invalid name/phone → inline error messages → no network call
     - Test network failure: mock rejected service call → error toast → form input preserved
     - _Requirements: 15.3_
 
-  - [~] 12.2 Write component tests for menu browsing
+  - [ ] 12.2 Write component tests for menu browsing
     - Test initial render displays expected number of item cards from mock data
     - Test category filter reduces visible items to only that category
     - Test sort option reorders items correctly
     - Test tapping item card expands to show description and allergens
     - _Requirements: 15.4_
 
-  - [~] 12.3 Write unit tests for utilities and services
+  - [ ] 12.3 Write unit tests for utilities and services
     - Test validation functions (validateName, validatePhone) with valid and edge-case inputs
     - Test nutrition calculations (totals, percentages, protein ratio)
     - Test formatters (formatPrice, formatTime)
     - Test firebaseService error mapping and request deduplication
     - _Requirements: 15.2, 15.5, 15.6_
 
-  - [~] 12.4 Configure code quality tooling and final README
+  - [ ] 12.4 Configure code quality tooling and final README
     - Verify husky + lint-staged configuration works (lint + format on pre-commit)
     - Update README.md with: project setup steps, folder structure overview, available npm scripts, required environment variables with examples, deployment instructions
     - _Requirements: 17.2, 17.5_
 
-- [~] 13. Final checkpoint - Ensure all tests pass
+- [ ] 13. Final checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes

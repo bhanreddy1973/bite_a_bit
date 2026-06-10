@@ -3,7 +3,7 @@
 import React from 'react';
 
 interface BadgeProps {
-  variant?: 'default' | 'vegetarian' | 'non-vegetarian' | 'vegan' | 'cart';
+  variant?: 'default' | 'vegetarian' | 'non-vegetarian' | 'vegan' | 'cart' | 'warning' | 'success' | 'info';
   children: React.ReactNode;
   className?: string;
 }
@@ -28,6 +28,18 @@ const variantStyles: Record<string, React.CSSProperties> = {
   cart: {
     backgroundColor: 'var(--color-error)',
     color: 'var(--color-text-inverse)',
+  },
+  warning: {
+    backgroundColor: '#FFF3E0',
+    color: '#E65100',
+  },
+  success: {
+    backgroundColor: '#E8F5E9',
+    color: '#2E7D32',
+  },
+  info: {
+    backgroundColor: '#E3F2FD',
+    color: '#1565C0',
   },
 };
 
